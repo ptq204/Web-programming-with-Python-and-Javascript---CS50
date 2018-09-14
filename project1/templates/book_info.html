@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}
+    {{ Title }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ Title }}</h1>
+    <p>ISBN: {{ ISBN }}</p>
+    <p>Author: {{ Author }}</p>
+    <p>Year: {{ Year }}</p>
+    <form action="{{ url_for('add_comment', ISBN=ISBN, userid=userid) }}" method="POST">
+        <div class="form-group">
+            <label for="cmt">Comment</label>
+            <input class="form-control" name="comment" placeholder="comment here">
+        </div>
+        
+        <div class="col-xs-2">
+            <label for="rate">Rating</label>
+            <input class="form-control" name="rating">
+        </div>
+        <br>
+        <button class="btn btn-primary">Comment</button>
+    </form>
+    
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+        <p>{{ review.username }} ({{ review.rating }}): {{review.comment}}</p>
+    {% endfor %}
+{% endblock %}

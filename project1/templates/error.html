@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}
+    SEARCH RESULTS
+{% endblock %}
+
+{% block body %}
+    <h1>Error</h1>
+    {{ message }}
+
+    {% if flag == 1 %}
+        <a href="{{ url_for('signup') }}">Sign up</a>
+    {% endif %}
+{% endblock %}

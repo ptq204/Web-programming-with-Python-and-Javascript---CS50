@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    CHAT APPLICATION
+{% endblock %}
+
+{% block body %}
+    <h1>Welcome {{ name }}</h1>
+    <div class="container">
+        
+        <div class="column">
+            <h2>Create channel</h2>
+            <form action="{{ url_for('create_channel')}}" method="POST">
+                <div class="form-group row">
+                    <div class="col-xs-3">
+                        <input class="form-control" placeholder="room name" name="room_name">
+                        <br>
+                        <input class="form-control" placeholder="secret_key" name="secret_key">
+                    </div>
+                    <br>
+                    <button class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="column">
+            <h2>Current channels</h2>
+            <ul class="channel-lists" style="margin-right:20px;">
+                {% for id in channels: %}
+                    <li><a href="{{ url_for('channel', channelID = id) }}">{{ channels[id].name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+    {% if err_msg %}
+        {{ err_msg }}
+    {% endif %}
+{% endblock %}

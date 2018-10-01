@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    CHAT APPLICATION
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div id="chat" style="float:left;">
+            <div id="conservation" class="scroll-chat">
+                {% for msg in channel.messages: %}
+                    {% if you not in msg.hiddens: %}
+                        <div class="msg-layout">
+                            {% if msg.sender == you %}
+                                <p class="msg-sender-user">{{ msg.sender }}:</p>
+                            {% else %}
+                                <p class="msg-sender">{{ msg.sender}}</p>
+                            {% endif %}
+                            <p>{{ msg.content }}</p>
+                            <span class="time-right">{{ msg.timestamp }}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div id='chat-input'>
+                <input id="chat-content" size="63" placeholder="type your message">
+                <button id="send" class="btn btn-primary">send</button>
+            </div>
+            <div id="tmp">
+                <input id="msg">
+                <button id="send1">submit</button>
+            </div>
+        </div>
+        
+        <div id="member_list" style="float:right; margin-right: 150px;">
+            <h2>Members:</h2>
+                <p class="user-name" id="you">{{ you }}</p>
+                <div id="mem-list">
+                    {% for mem in channel.user_list: %}
+                        {% if(mem != you): %}
+                            <input type="checkbox" value="{{ mem }}"> {{ mem }}<br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+    
+{% endblock %}

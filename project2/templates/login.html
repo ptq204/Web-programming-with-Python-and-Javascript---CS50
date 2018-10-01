@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    CHAT APPLICATION
+{% endblock %}
+
+{% block body %}
+    <form action="{{ url_for('check_login') }}" method="POST">
+        <input class="form-control" type="text" name="username" placeholder="username" style="margin: auto;">
+        <button class="btn btn-primary" style="margin: auto;">Sign in</button>
+    </form>
+
+    <br>
+    {% if err_msg %}
+        {{ err_msg }}
+    {% endif %}
+{% endblock %}
